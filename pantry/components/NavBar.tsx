@@ -1,58 +1,51 @@
-import Link from "next/link";
+import Link from "next/link"
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { MountainIcon, MenuIcon } from "lucide-react";
 import AuthButton from "./AuthButton";
 
 export default function NavBar() {
   return (
-    <div className="navbar bg-background-600 border shadow-md shadow-accent-500">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div> 
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-background-500 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link href={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link href={"#"}>Insights</Link>
-            </li>
-          
-          </ul>
-        </div>
-        <Link href={"/"} className="btn btn-ghost text-xl">
-          PantryInsight
+    <header className="w-full bg-background">
+    <div className="container flex items-center justify-between h-16 px-4 md:px-6">
+      <Link href="#" className="flex items-center gap-2" >
+        <MountainIcon className="h-6 w-6" />
+        <span className="text-lg font-semibold">PantryInsight</span>
+      </Link>
+      <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <Link href="#" className="text-black hover:underline" >
+          Home
+        </Link>
+        <Link href="#" className="text-muted-foreground hover:underline" >
+          About
+        </Link>
+      </nav>
+      <div className="hidden md:flex items-center gap-4">
+       <AuthButton />
+      </div>
+      <div className="md:hidden">
+      <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon" className="rounded-full">
+        <MenuIcon className="h-6 w-6" />
+        <span className="sr-only">Toggle navigation menu</span>
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="top" className="w-full">
+      <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+      <SheetDescription className="sr-only">Menu options for navigation</SheetDescription>
+      <div className="grid gap-4 py-6 px-4">
+        <Link href="#" className="text-lg font-medium text-primary-foreground hover:underline">
+          Home
+        </Link>
+        <Link href="#" className="text-lg font-medium text-muted-foreground hover:underline">
+          About
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex ">
-        <ul className="menu menu-horizontal px-1 ">
-          <li>
-            <Link href={"/"}>Home</Link>
-          </li>
-          <li>
-            <Link href={"#"}>Insights</Link>
-          </li>
-    
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <AuthButton />
+    </SheetContent>
+  </Sheet>
       </div>
     </div>
+  </header>
   );
 }

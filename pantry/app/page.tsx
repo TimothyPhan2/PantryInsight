@@ -1,11 +1,9 @@
-import { useUser } from "@clerk/nextjs";
-import { db } from "@/firebase/firebase-config";
-import SearchBar from "@/components/SearchBar";
+import PantryManager from "@/components/PantryManager";
 
 export default function Home() {
   return (
-    <div className="flex justify-center ">
-      <SearchBar />
+    <div className="flex flex-col gap-6 w-full mt-10">
+      <PantryManager />
     </div>
   );
 }
