@@ -92,8 +92,7 @@ export default function RecipePage() {
           <div className="space-y-2">
             <h2 className="text-2xl font-bold">Find a Recipe</h2>
             <p className="text-muted-foreground">
-              Select the ingredients you have and we'll generate a recipe for
-              you.
+            Select the ingredients you have and we&#39;ll generate a recipe for you.
             </p>
           </div>
           <form className="space-y-6" onSubmit={handleSubmit}>
