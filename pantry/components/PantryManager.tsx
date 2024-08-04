@@ -42,7 +42,7 @@ export default function PantryManager() {
         name: form.name,
         quantity: form.quantity,
         user_id: user?.id,
-        expiration: form.expiration,
+        expiration: form.expiration || null,
       },
     ]);
     if (error) {

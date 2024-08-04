@@ -13,11 +13,11 @@ export default function NavBar() {
         <span className="text-lg font-semibold">PantryInsight</span>
       </Link>
       <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-        <Link href="#" className="text-black hover:underline" >
+        <Link href="/" className="text-black hover:underline" >
           Home
         </Link>
-        <Link href="#" className="text-muted-foreground hover:underline" >
-          About
+        <Link href="/recipe" className="text-muted-foreground hover:underline" >
+          Recipes
         </Link>
       </nav>
       <div className="hidden md:flex items-center gap-4">
@@ -38,8 +38,8 @@ export default function NavBar() {
         <Link href="#" className="text-lg font-medium text-primary-foreground hover:underline">
           Home
         </Link>
-        <Link href="#" className="text-lg font-medium text-muted-foreground hover:underline">
-          About
+        <Link href="/recipe" className="text-lg font-medium text-muted-foreground hover:underline">
+          Recipes
         </Link>
       </div>
     </SheetContent>

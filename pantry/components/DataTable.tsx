@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { supabaseClient } from "@/utils/supabase/client";
 import { useUser } from "@clerk/nextjs";
-export default function DataTable({searchQuery}: {searchQuery: string}) {
+export default function DataTable({ searchQuery }: { searchQuery: string }) {
   const { user, isSignedIn } = useUser();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,7 +44,7 @@ export default function DataTable({searchQuery}: {searchQuery: string}) {
     name: string;
     quantity: number;
     user_id: string;
-    expiration: string;
+    expiration: string | null;
   }
 
   const [data, setData] = useState<PantryItem[]>([]);
@@ -90,16 +90,24 @@ export default function DataTable({searchQuery}: {searchQuery: string}) {
 
   const saveEdit = async () => {
     if (selectedItem) {
+      // Ensure expiration is either a valid date or null
+      const updatedItem = {
+        ...selectedItem,
+        expiration:
+          selectedItem.expiration === "" ? null : selectedItem.expiration,
+      };
+
       const { error } = await supabaseClient
         .from("PantryItems")
-        .update(selectedItem)
+        .update(updatedItem)
         .eq("id", selectedItem.id);
+
       if (error) {
         console.error(error);
       } else {
         setData((prevData) =>
           prevData.map((item) =>
-            item.id === selectedItem.id ? selectedItem : item
+            item.id === selectedItem.id ? updatedItem : item
           )
         );
         setIsEditModalOpen(false);
@@ -111,7 +119,7 @@ export default function DataTable({searchQuery}: {searchQuery: string}) {
     fetchItems();
   }, [isSignedIn, data]);
 
-  const filteredItems = data.filter(item =>
+  const filteredItems = data.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
   return (
@@ -186,17 +194,22 @@ export default function DataTable({searchQuery}: {searchQuery: string}) {
                     }
                   }}
                 />
-                <Label htmlFor="expiration">Expiration Date</Label>
-                <Input
-                  id="expiration"
-                  value={selectedItem.expiration}
-                  onChange={(e) =>
-                    setSelectedItem({
-                      ...selectedItem,
-                      expiration: e.target.value,
-                    })
-                  }
-                />
+
+                <>
+                  <Label htmlFor="expiration">Expiration Date</Label>
+                  <Input
+                    id="expiration"
+                    value={selectedItem.expiration || ""}
+                    placeholder="YYYY-MM-DD"
+                    type="date"
+                    onChange={(e) =>
+                      setSelectedItem({
+                        ...selectedItem,
+                        expiration: e.target.value,
+                      })
+                    }
+                  />
+                </>
               </div>
               <DialogFooter>
                 <Button onClick={saveEdit}>Save</Button>
