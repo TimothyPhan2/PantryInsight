@@ -79,7 +79,7 @@ export default function RecipePage() {
       }
     };
     fetchItems();
-  }, [isSignedIn]);
+  }, [isSignedIn, user]);
 
   console.log(ingredients);
   return (
