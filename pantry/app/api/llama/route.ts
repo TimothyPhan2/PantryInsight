@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   }
 
   
-  export async function getGroqChatCompletion(message: string) {
+async function getGroqChatCompletion(message: string) {
     const jsonSchema = JSON.stringify(schema, null, 4);
     return groq.chat.completions.create({
         "messages": [
