@@ -119,6 +119,12 @@ export default function DataTable({ searchQuery }: { searchQuery: string }) {
     fetchItems();
   }, [isSignedIn, data, user]);
 
+  useEffect(() => {
+    if (!isSignedIn) {
+      setData([]);
+    }
+  }, [isSignedIn]);
+
   const filteredItems = data.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

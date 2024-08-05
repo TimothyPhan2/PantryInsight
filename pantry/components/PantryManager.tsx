@@ -19,7 +19,7 @@ import { useUser } from "@clerk/nextjs";
 import DataTable from "./DataTable";
 export default function PantryManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
   const [form, setForm] = useState({
     name: "",
     quantity: 1,
@@ -59,6 +59,8 @@ export default function PantryManager() {
   return (
     <>
       <header className="px-4 sm:px-6 flex justify-center items-center h-16">
+        {isSignedIn ? (
+          <>
         <div className="relative w-full max-w-md">
           <SearchIcon className="absolute left-2.5 top-3.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -76,6 +78,12 @@ export default function PantryManager() {
         >
           Add Item
         </Button>
+          </>
+        ): (
+          <p className="text-lg font-semibold text-muted-foreground">
+            Please sign in to manage your pantry
+          </p>
+        )}
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

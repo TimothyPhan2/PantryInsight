@@ -84,15 +84,12 @@ export default function RecipePage() {
   console.log(ingredients);
   return (
     <div className="flex flex-col min-h-dvh">
-      <header className="bg-primary text-primary-foreground py-4 px-6">
-        <h1 className="text-3xl font-bold">Recipe Generator</h1>
-      </header>
       <main className="flex-1 bg-background p-8 md:p-12 lg:p-16">
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold">Find a Recipe</h2>
             <p className="text-muted-foreground">
-            Select the ingredients you have and we&#39;ll generate a recipe for you.
+            Select the ingredients in your pantry to generate a recipe made from our AI chef.
             </p>
           </div>
           <form className="space-y-6" onSubmit={handleSubmit}>
